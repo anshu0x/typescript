@@ -191,3 +191,70 @@
 // childObj.printName();
 
 //! name space or modules
+
+enum Surname {
+  sharma = "sharma",
+  parashar = "parashar",
+}
+
+console.log(Surname.parashar);
+
+
+//!  generics
+
+
+interface HasAge {
+  age: number;
+}
+
+interface Players {
+  age: number;
+  name: string;
+}
+interface Users {
+  age: number;
+  name: string;
+  phn: number;
+}
+
+const players: Players[] = [
+  {
+    name: "anshu",
+    age: 12,
+  },
+  {
+    name: "sharma",
+    age: 22,
+  },
+  {
+    name: "chinu",
+    age: 8,
+  },
+];
+
+let obj: HasAge[] = [{ age: 12 }, { age: 31 }, { age: 92 }];
+
+function getOldest<T extends HasAge>(people: T[]): T {
+  return people.sort((a, b) => b.age - a.age)[0];
+}
+
+console.log(getOldest(obj));
+
+console.log(getOldest(players));
+
+
+//  Generic function for  api call
+
+const fetchUsers = async <T>(url: string): Promise<T[]> => {
+  const data = await fetch("anshusharm/url");
+  const res = await data.json();
+  return res;
+};
+
+(async () => {
+  let d = await fetchUsers<Players>("assd");
+  let e = await fetchUsers<Users>("assd");
+  
+  d[0].age;
+  e[0].phn;
+})();
