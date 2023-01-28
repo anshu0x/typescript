@@ -245,16 +245,18 @@ console.log(getOldest(players));
 
 //  Generic function for  api call
 
-const fetchUsers = async <T>(url: string): Promise<T[]> => {
+const fetchUsers = async <T>(url: string): Promise<T> => {
   const data = await fetch("anshusharm/url");
   const res = await data.json();
   return res;
 };
 
 (async () => {
-  let d = await fetchUsers<Players>("assd");
-  let e = await fetchUsers<Users>("assd");
+  let d = await fetchUsers<Players[]>("assd");
+  let e = await fetchUsers<Users[]>("assd");
+  let f = await fetchUsers<Users>("assd");
   
   d[0].age;
   e[0].phn;
+  f.age
 })();
