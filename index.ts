@@ -192,71 +192,185 @@
 
 //! name space or modules
 
-enum Surname {
-  sharma = "sharma",
-  parashar = "parashar",
-}
+// enum Surname {
+//   sharma = "sharma",
+//   parashar = "parashar",
+// }
 
-console.log(Surname.parashar);
+// console.log(Surname.parashar);
 
+// //!  generics
 
-//!  generics
+// interface HasAge {
+//   age: number;
+// }
 
+// interface Players {
+//   age: number;
+//   name: string;
+// }
+// interface Users {
+//   age: number;
+//   name: string;
+//   phn: number;
+// }
 
-interface HasAge {
-  age: number;
-}
+// const players: Players[] = [
+//   {
+//     name: "anshu",
+//     age: 12,
+//   },
+//   {
+//     name: "sharma",
+//     age: 22,
+//   },
+//   {
+//     name: "chinu",
+//     age: 8,
+//   },
+// ];
 
-interface Players {
-  age: number;
-  name: string;
-}
-interface Users {
-  age: number;
-  name: string;
-  phn: number;
-}
+// let obj: HasAge[] = [{ age: 12 }, { age: 31 }, { age: 92 }];
 
-const players: Players[] = [
-  {
-    name: "anshu",
-    age: 12,
-  },
-  {
-    name: "sharma",
-    age: 22,
-  },
-  {
-    name: "chinu",
-    age: 8,
-  },
-];
+// function getOldest<T extends HasAge>(people: T[]): T {
+//   return people.sort((a, b) => b.age - a.age)[0];
+// }
 
-let obj: HasAge[] = [{ age: 12 }, { age: 31 }, { age: 92 }];
+// console.log(getOldest(obj));
 
-function getOldest<T extends HasAge>(people: T[]): T {
-  return people.sort((a, b) => b.age - a.age)[0];
-}
+// console.log(getOldest(players));
 
-console.log(getOldest(obj));
+// //  Generic function for  api call
 
-console.log(getOldest(players));
+// const fetchUsers = async <T>(url: string): Promise<T> => {
+//   const data = await fetch("anshusharm/url");
+//   const res = await data.json();
+//   return res;
+// };
 
+// (async () => {
+//   let d = await fetchUsers<Players[]>("assd");
+//   let e = await fetchUsers<Users[]>("assd");
+//   let f = await fetchUsers<Users>("assd");
 
-//  Generic function for  api call
+//   d[0].age;
+//   e[0].phn;
+//   f.age;
+// })();
 
-const fetchUsers = async <T>(url: string): Promise<T> => {
-  const data = await fetch("anshusharm/url");
-  const res = await data.json();
-  return res;
-};
+//   generic function
 
-(async () => {
-  let d = await fetchUsers<Players[]>("assd");
-  let e = await fetchUsers<Users[]>("assd");
-  let f = await fetchUsers<Users>("assd");
-  
-  d[0].age;
-  e[0].phn;
-  f.age
-})();
+// type User = {
+//   name: string;
+//   age: number;
+//   phn: number;
+// };
+
+// let fechdata = async <T>(url: string): Promise<T> => {
+//   let data = await fetch("https://anshusharma.me" + url);
+//   return await data.json();
+// };
+
+// (async () => {
+//   let user = await fechdata<User>("/user");
+//   let users = await fechdata<User[]>("/users");
+// })();
+
+//  utlity function in typescript
+
+// type Person = {
+//   name: string;
+//   age: number;
+// };
+
+// interface Todo {
+//   title: string;
+//   description: string;
+// }
+
+// take name from person
+// type User1 = Pick<Person, "name">;
+
+// take all except name
+// type User2 = Omit<Person, "name">;
+
+// make all field optional
+// type User3 = Partial<Todo>;
+
+// make all field required
+// type User4 = Required<Todo>;
+
+// type User5 = Readonly<Todo>;
+
+// let user4: User4 = {
+//   description: "",
+//   title: "",
+// };
+
+// let user5: User5 = {
+//   description: "",
+//   title: "",
+// };
+
+// can not be changed -- readonly
+// user5.description=""
+
+//  Record keyword
+// Record<Keys, Type>
+
+// Constructs an object type whose property keys are Keys and whose property values are Type. This utility can be used to map the properties of a type to another type.
+
+// type CatName = "miffy" | "puffy";
+
+// type Colors = "red" | "green" | "blue";
+
+// let cat: Record<CatName, string> = {
+//   miffy: "Asd",
+//   puffy: "sad",
+// };
+
+// let cat2: Record<CatName, Colors> = {
+//   miffy: "blue",
+//   puffy: "green",
+// };
+
+// type Tperson = {
+//   miffy: string;
+//   puffy: string;
+// };
+
+// let person: Tperson = {
+//   miffy: "",
+//   puffy: "",
+// };
+
+// The satisfies  Operator;
+
+// const palette = {
+//   red: [255, 0, 0],
+//   green: "#00ff00",
+//   bleu: [0, 0, 255],
+//   //  ^^^^ sacrebleu - we've made a typo!
+// };
+// // We want to be able to use array methods on 'red'...
+// const redComponent = palette.red.at(0);
+// // or string methods on 'green'...
+// const greenNormalized = palette.green.toUpperCase();
+
+// type Colors = "red" | "green" | "blue";
+// type RGB = [red: number, green: number, blue: number];
+// const palette: Record<Colors, string | RGB> = {
+//   red: [255, 0, 0],
+//   green: "#00ff00",
+//   blue: [0, 0, 255],
+//   //  ~~~~ The typo is now correctly detected
+// };
+// But we now have an undesirable error here - 'palette.red' "could" be a string.
+// const redComponent = palette.red.at(0);
+
+// type CatName = "name" | "phn";
+
+// let cat2: Record<CatName, RGB> = {
+//   name: [1, 2, 4],
+//   phn: [2, 2, 4],
+// };
