@@ -318,6 +318,20 @@
 //  Record keyword
 // Record<Keys, Type>
 
+//  it can be also use for dynamic object
+
+// const obj = {}
+
+// obj["name"] = "anshu"
+// now typescript will throw an error here
+
+//  this is how we can fix it
+
+// type Tobj = Record<string, string>;
+// const obj:Tobj = {};
+
+// obj["name"] = "anshu"
+
 // Constructs an object type whose property keys are Keys and whose property values are Type. This utility can be used to map the properties of a type to another type.
 
 // type CatName = "miffy" | "puffy";
@@ -368,9 +382,54 @@
 // But we now have an undesirable error here - 'palette.red' "could" be a string.
 // const redComponent = palette.red.at(0);
 
+// type RGB = [red: number, green: number, blue: number];
 // type CatName = "name" | "phn";
 
 // let cat2: Record<CatName, RGB> = {
 //   name: [1, 2, 4],
 //   phn: [2, 2, 4],
 // };
+
+//  satisfies operator
+
+//  can be used when we are overwriting types
+// type Color =
+//   | string
+//   | {
+//       color: string;
+//     };
+
+// let green: Color = "green";
+
+// green.charAt(0)
+
+// let blue = "blue" as Color;
+//  the type of blue is Color
+
+// let red = "red" satisfies Color;
+
+//  now the type of red is string
+
+//  instanceof with try and catch block
+
+// (function fetchData() {
+//   let data = [1, 2, 4, 2, 2];
+//   try {
+//     if (data) {
+//       throw new Error("an error occured");
+//     }
+//   } catch (error) {
+//     if (error instanceof Error) {
+//       console.log("i am a error");
+//       console.log(error.cause);
+//       console.log(error.message);
+//       // console.log(error.name);
+//       // console.log(error.stack);
+
+//     }
+//     //  first aaproach
+//     // return (error as Error).name
+
+//   }
+// })();
+
