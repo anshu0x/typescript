@@ -433,3 +433,13 @@
 //   }
 // })();
 
+// import { Tuffle } from "./test1";
+
+// let tuf1: Tuffle = {
+//   color: "red",
+//   price: 1212,
+// };
+
+// if (tuf1 instanceof Object) {
+//   console.log(tuf1.color);
+// }
